@@ -4,10 +4,9 @@
 
 This document defines the **official process** to build and manage the local Docker Compose environment for the RAG Knowledge Engine.
 
-✅ Docker Compose will orchestrate all required services consistently:
+✅ Docker Compose orchestrates all required services consistently:
 - FastAPI microservices
 - PostgreSQL + pgvector
-- (Future) Local N8N orchestrator (optional)
 
 ✅ Everything runs locally for testing, development, and eventual productionization.
 
@@ -28,13 +27,13 @@ Every engineer can spin up or tear down the environment easily.
 
 | Service | Purpose |
 |:--------|:--------|
+| intake_agent | Handles file intake and preprocessing |
 | embedding_service | Handles text-to-vector embedding |
 | retriever_service | Handles semantic retrieval from vector DB |
 | author_agent | Drafts initial documents |
 | evaluator_agent | Evaluates document structure/quality |
 | enhancer_agent | Enhances documents based on evaluation |
-| human_review_layer | (Optional) Human sign-off layer |
-| postgres | PostgreSQL database with pgvector extension |
+| supabase_db | PostgreSQL database with pgvector extension |
 
 ✅ Future: Add n8n orchestrator container
 
@@ -63,20 +62,36 @@ Every engineer can spin up or tear down the environment easily.
 
 ---
 
+# 📋 Corrected Port Mapping
+
+| Service | Host Port | Container Port |
+|:--------|:----------|:----------------|
+| intake_agent | 8000 | 8000 |
+| embedding_service | 8001 | 8000 |
+| retriever_service | 8002 | 8000 |
+| author_agent | 8003 | 8000 |
+| evaluator_agent | 8004 | 8000 |
+| enhancer_agent | 8005 | 8000 |
+| supabase_db | 5432 | 5432 |
+
+✅ Internally all FastAPI apps run on port 8000
+✅ Host-side ports differ per service
+
+---
+
 # 📆 Phase Status
 
 ✅ Docker Compose documentation initialized
-⬜ Service-by-service Dockerfile creation in progress
-⬜ Full docker-compose.yml building in progress
+✅ Service-by-service Dockerfile creation completed
+✅ Full docker-compose.yml built
+✅ Local system bootstrap testing ready
 
 ---
 
 # 🚀 Next Actions
 
-- Create consistent Dockerfiles per service
-- Define volumes, ports, networking cleanly
-- Build minimal `docker-compose.yml`
-- Test service bootstrapping end-to-end locally
+- Build and run containers locally
+- Test agent-to-agent communication
+- Validate PostgreSQL database accessibility
 
 ---
-
