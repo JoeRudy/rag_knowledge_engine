@@ -1,0 +1,13 @@
+openai
+pinecone-client
+python-dotenv
+PyMuPDF
+python-docx
+pandas
+SpeechRecognition
+pytesseract
+Pillow
+loguru
+requests
+fastapi
+uvicorn
