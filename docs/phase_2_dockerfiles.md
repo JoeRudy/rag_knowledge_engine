@@ -59,6 +59,32 @@ This document captures all detailed instructions for creating and configuring Do
 
 ---
 
+# 🔢 Step 2.5: Create Dockerfile for Evaluator Agent
+
+### Purpose:
+- Define how to build the container for the `evaluator_agent`.
+
+### Actions:
+- Navigate to: `rag_knowledge_engine/agents/evaluator_agent/`
+- Create a `Dockerfile` with service port 8005.
+
+✅ Step 2.5 Completed
+
+---
+
+# 🔢 Step 2.6: Create Dockerfile for Enhancer Agent
+
+### Purpose:
+- Define how to build the container for the `enhancer_agent`.
+
+### Actions:
+- Navigate to: `rag_knowledge_engine/agents/enhancer_agent/`
+- Create a `Dockerfile` with service port 8006.
+
+✅ Step 2.6 Completed
+
+---
+
 # 👉 Professional Best Practices Being Followed
 
 | Practice | Why Important |
@@ -91,7 +117,8 @@ This document captures all detailed instructions for creating and configuring Do
 ✅ Step 2.2 Completed
 ✅ Step 2.3 Completed
 ✅ Step 2.4 Completed
-☑ Step 2.5 Next (Evaluator Service Dockerfile)
+✅ Step 2.5 Completed
+✅ Step 2.6 Completed
 
 ---
 
