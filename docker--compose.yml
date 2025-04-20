@@ -1,0 +1,96 @@
+version: '3.8'
+
+services:
+  intake_agent:
+    build:
+      context: ./agents/intake_agent
+      dockerfile: Dockerfile
+    container_name: intake_agent
+    ports:
+      - "8001:8001"
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  embedding_service:
+    build:
+      context: ./agents/embedding_service
+      dockerfile: Dockerfile
+    container_name: embedding_service
+    ports:
+      - "8002:8002"
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  retriever_service:
+    build:
+      context: ./agents/retriever_service
+      dockerfile: Dockerfile
+    container_name: retriever_service
+    ports:
+      - "8003:8003"
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  author_agent:
+    build:
+      context: ./agents/author_agent
+      dockerfile: Dockerfile
+    container_name: author_agent
+    ports:
+      - "8004:8004"
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  evaluator_agent:
+    build:
+      context: ./agents/evaluator_agent
+      dockerfile: Dockerfile
+    container_name: evaluator_agent
+    ports:
+      - "8005:8005"
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  enhancer_agent:
+    build:
+      context: ./agents/enhancer_agent
+      dockerfile: Dockerfile
+    container_name: enhancer_agent
+    ports:
+      - "8006:8006"
+    networks:
+      - rag_network
+    restart: unless-stopped
+
+  n8n:
+    image: n8nio/n8n
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    networks:
+      - rag_network
+    restart: unless-stopped
+    environment:
+      - GENERIC_TIMEZONE=America/New_York
+
+  supabase_db:
+    image: supabase/postgres
+    container_name: supabase_db
+    ports:
+      - "5432:5432"
+    networks:
+      - rag_network
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD=your_password
+      POSTGRES_USER=supabase_admin
+      POSTGRES_DB=supabase_db
+
+networks:
+  rag_network:
+    driver: bridge
