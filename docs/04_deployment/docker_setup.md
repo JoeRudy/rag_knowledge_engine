@@ -1,6 +1,6 @@
-# phase_5_docker_setup.md
+# docker_setup.md
 
-# 📚 Phase 5: Docker Setup and Deployment
+# 📚 Docker Setup and Deployment
 
 This document describes how the RAG Knowledge Engine is deployed locally using Docker and Docker Compose.
 
@@ -116,7 +116,7 @@ Each service folder contains its own codebase and Dockerfile.
 
 ---
 
-# 📋 Future Enhancements (Post-MVP)
+# 📋 Future Enhancements
 
 - Split services into multiple docker-compose.yml files (for dev vs prod setups).
 - Add monitoring container (e.g., Prometheus + Grafana).
