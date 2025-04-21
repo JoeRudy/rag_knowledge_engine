@@ -1,0 +1,3 @@
+fastapi           # Web framework to build the API endpoints
+uvicorn           # ASGI server to serve FastAPI apps
+psycopg2-binary   # PostgresSQL Driver (needed to talk to Supabase/Postgres later)
