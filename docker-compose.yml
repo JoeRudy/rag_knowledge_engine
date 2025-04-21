@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   intake_agent:
@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: intake_agent
     ports:
-      - "8000:8000"  # Host 8000 -> Container 8000
+      - "8001:8001"
     networks:
       - rag_network
     restart: unless-stopped
@@ -18,7 +18,7 @@ services:
       dockerfile: Dockerfile
     container_name: embedding_service
     ports:
-      - "8001:8000"  # Host 8001 -> Container 8000
+      - "8002:8002"
     networks:
       - rag_network
     restart: unless-stopped
@@ -29,7 +29,7 @@ services:
       dockerfile: Dockerfile
     container_name: retriever_service
     ports:
-      - "8002:8000"  # Host 8002 -> Container 8000
+      - "8003:8003"
     networks:
       - rag_network
     restart: unless-stopped
@@ -40,7 +40,7 @@ services:
       dockerfile: Dockerfile
     container_name: author_agent
     ports:
-      - "8003:8000"  # Host 8003 -> Container 8000
+      - "8004:8004"
     networks:
       - rag_network
     restart: unless-stopped
@@ -51,7 +51,7 @@ services:
       dockerfile: Dockerfile
     container_name: evaluator_agent
     ports:
-      - "8004:8000"  # Host 8004 -> Container 8000
+      - "8005:8005"
     networks:
       - rag_network
     restart: unless-stopped
@@ -62,13 +62,13 @@ services:
       dockerfile: Dockerfile
     container_name: enhancer_agent
     ports:
-      - "8005:8000"  # Host 8005 -> Container 8000
+      - "8006:8006"
     networks:
       - rag_network
     restart: unless-stopped
 
   supabase_db:
-    image: supabase/postgres
+    image: ankane/pgvector
     container_name: supabase_db
     ports:
       - "5432:5432"
@@ -76,9 +76,20 @@ services:
       - rag_network
     restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: your_password
       POSTGRES_USER: supabase_admin
+      POSTGRES_PASSWORD: your_password
       POSTGRES_DB: supabase_db
+
+  n8n:
+    image: n8nio/n8n
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    networks:
+      - rag_network
+    restart: unless-stopped
+    environment:
+      - GENERIC_TIMEZONE=America/New_York
 
 networks:
   rag_network:
